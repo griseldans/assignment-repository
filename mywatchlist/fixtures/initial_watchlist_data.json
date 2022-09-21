@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "A Whisker Away",
+            "rating": 5,
+            "release_date": "18 Juni 2020",
+            "review": "Gemes, sedih, lucu, sebel, pengen re-watch lagi"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 2,
+        "fields": {
+            "watched": false,
+            "title": "Incantation",
+            "rating": 0,
+            "release_date": "18 Maret 2022",
+            "review": "-"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 3,
+        "fields": {
+            "watched": false,
+            "title": "Money Heist: Korea",
+            "rating": 0,
+            "release_date": "24 Juni 2022",
+            "review": "-"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "The Sea Beast",
+            "rating": 4,
+            "release_date": "1 Juli 2022",
+            "review": "Bagus, tapi masih kureng, anak kecilnya agak sotoy"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 5,
+        "fields": {
+            "watched": false,
+            "title": "Purple Hearts",
+            "rating": 0,
+            "release_date": "29 Juli 2022",
+            "review": "-"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Minions: The Rise of Gru",
+            "rating": 5,
+            "release_date": "28 Juni 2022",
+            "review": "Bagus, lucu, seru, menghibur lah buat temen makan"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 7,
+        "fields": {
+            "watched": true,
+            "title": "The Gray Man",
+            "rating": 4,
+            "release_date": "22 Juli 2022",
+            "review": "Actionnya keren tapi karena saya lemot jadi agak kaget aja latar tempatnya cepet-cepet"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 8,
+        "fields": {
+            "watched": true,
+            "title": "Top Gun: Maverick",
+            "rating": 5,
+            "release_date": "27 Mei 2022",
+            "review": "Wow ini gut banget aku suka apalagi scene-scene yang lagi terbang"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Encanto",
+            "rating": 5,
+            "release_date": "24 November 2021",
+            "review": "Ini bagus, lagu-lagunya enak, tapi emang si nenek egois sih"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlist",
+        "pk": 10,
+        "fields": {
+            "watched": false,
+            "title": "Little Women",
+            "rating": 0,
+            "release_date": "7 Februari 2020",
+            "review": "-"
+        }
+    }
+]
