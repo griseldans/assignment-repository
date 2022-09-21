@@ -20,7 +20,7 @@ Menambahkan
 Membuat class `WatchList` yang berisi atribut yang dibutuhkan. Kemudian, model tersebut di-*migrate* supaya Django App bisa menerapkan skema model
 
 ### Menambahkan minimal 10 data
-Membuat `initial_watchlist_data.json` dan `initial_watchlist_data.xml` sebagai tempat menampung data mengenai film yang akan/sudah ditonton. Kemudian, data di-*load* sebagai database lokal Django App
+Membuat `initial_watchlist_data.json` dan `initial_watchlist_data.xml` sebagai tempat menampung data mengenai film yang akan/sudah ditonton. Kemudian, data cd di-*load* sebagai database lokal Django App
 
 ### Mengimplementasikan sebuah fitur untuk menyajikan data JSON, XML, HTML
 Menambahkan fungsi `show_json` dan `show_xml`di `views.py` milik folder `mywatchlist`
