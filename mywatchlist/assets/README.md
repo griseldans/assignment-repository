@@ -42,6 +42,6 @@ Menambahkan path yang merujuk ke 3 fungsi baru yang ditambahkan di `views.py` mi
 
 
 ## Postman
-![Alt Text](assets/ss-html.png)
-![Alt Text](assets/ss-json.png)
-![Alt Text](assets/ss-xml.png)
+![Alt Text](ss-html.png)
+![Alt Text](ss-json.png)
+![Alt Text](ss-xml.png)
