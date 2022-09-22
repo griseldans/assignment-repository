@@ -25,21 +25,26 @@ Menjalankan `python manage.py startapp mywatchlist` pada virtual environment `as
 
 ### Menambahkan *path* `mywatchlist`
 Menambahkan  
-    >path('mywatchlist/', include('mywatchlist.urls')),
+    > path('mywatchlist/', include('mywatchlist.urls')),
     pada `urls.py` milik `project_django`
 
 ### Membuat model pada `models.py` milik folder `mywatchlist`
 Membuat class `WatchList` yang berisi atribut yang dibutuhkan. Kemudian, model tersebut di-*migrate* supaya Django App bisa menerapkan skema model
 
 ### Menambahkan minimal 10 data
-Membuat `initial_watchlist_data.json` dan `initial_watchlist_data.xml` sebagai tempat menampung data mengenai film yang akan/sudah ditonton. Kemudian, data cd di-*load* sebagai database lokal Django App
+Membuat `initial_watchlist_data.json` sebagai tempat menampung data mengenai film yang akan/sudah ditonton. Kemudian, data cd di-*load* sebagai database lokal Django App
 
 ### Mengimplementasikan sebuah fitur untuk menyajikan data JSON, XML, HTML
 Menambahkan fungsi `show_json` dan `show_xml`di `views.py` milik folder `mywatchlist`
 
 ### Membuat routing untuk ketiga data tersebut
-Menambahkan path yang merujuk ke 3 fungsi baru yang ditambahkan di `views.py` milik folder `mywatchlist`
-
+Menambahkan path: 
+```
+    path('json/', show_json, name='show_json'),
+    path('xml/', show_xml, name='show_xml'),
+    path('html/', show_watchlist, name='show_watchlist'),
+```
+yang ditambahkan di `views.py` milik folder `mywatchlist`
 
 ## Postman
 ![Alt Text](ss-html.png)
