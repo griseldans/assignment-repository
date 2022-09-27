@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1 style = "text-align: center;">My To Do List</h1>
+
+  <style>
+    table, th, td {
+      border:1px solid black;
+    }
+  </style>
+
+  <table style="width:100%">
+    <tr>
+      <th>Judul Task</th>
+      <th>Deskripsi Task</th>
+      <th>Status Task</th>
+      <th>Tombol Selesai</th>
+      <th>Hapus Task</th>
+    </tr>
+    
+    {% for task in todolist %}
+      <tr>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+
+        {% if task.is_finished %}
+            <td>Selesai</td>
+        {% else %}
+            <td>Belum Selesai</td>
+        {% endif %}
+
+        <td></td>
+        <td></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+
+ {% endblock content %}
