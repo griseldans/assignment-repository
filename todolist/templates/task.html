@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Task Baru</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class = "buat_task">
+
+    <h1>Buat Task Baru</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{forms.as_table}}
+        <input type="submit" value="Tambah Task">
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+
+</div>
+
+{% endblock content %}

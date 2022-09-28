@@ -1,3 +1,5 @@
+from todolist.forms import TaskForm
+
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -21,6 +23,7 @@ def show_todolist(request):
 
     context = {
         'todolist' : data_todolist,
+        'username' : request.user,
         'last_login': request.COOKIES['last_login'],
     }
 
@@ -56,6 +59,18 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    response = HttpResponseRedirect(reverse('wishlist:login'))
+    response = HttpResponseRedirect(reverse('todolist:login'))
     response.delete_cookie('last_login')
     return response
+
+@login_required(login_url='/todolist/login/')
+def get_task(request):
+    form = TaskForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            tempsave = form.save(commit=False)
+            tempsave.user = request.user
+            form.save()
+
+    context = {'forms': form}
+    return render(request, 'task.html', context)
