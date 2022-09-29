@@ -81,19 +81,16 @@ def get_task(request):
 def update_task(request, pk):
     model = ToDoList.objects.get(id=pk)
 
-    if request.method == "POST":
-        print(model.is_finished)
-        if(model.is_finished == False):
-            model.is_finished = True
-        else:
-            model.is_finished = False
+    if(model.is_finished == False):
+        model.is_finished = True
+    else:
+        model.is_finished = False
     model.save()
     return redirect('todolist:show_todolist')
 
 
 @login_required(login_url='/todolist/login/')
 def delete_task(request, pk):
-    if request.methos == "POST":
-        ToDoList.objects.get(id=pk).delete()
+    ToDoList.objects.get(id=pk).delete()
     return(redirect('todolist:show_todolist'))
     
