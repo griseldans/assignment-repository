@@ -34,16 +34,13 @@
             <td>Belum Selesai</td>
         {% endif %}
 
-        <td>
-          <form method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Update">
-          </form>
-        </td>
-        <td><a class="btn delete-btn" href="{% url 'todolist:delete-task' task.id %}"></a></td>
+        <td><button><a class="btn delete-btn" href="{% url 'todolist:update-task' task.id %}">Update</a></button></td>
+        <td><button><a class="btn delete-btn" href="{% url 'todolist:delete-task' task.id %}">Hapus</a></button></td>
       </tr>
     {% endfor %}
   </table>
+  <br><p>Login terakhir: {{last_login}}</p>
+  <br>
   <button><a href="{% url 'todolist:create-task' %}">Tambah Task Baru</a>"</button>
   <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
 

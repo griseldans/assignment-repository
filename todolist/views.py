@@ -1,5 +1,5 @@
 from statistics import mode
-from todolist.forms import TaskForm, UpdateTask
+from todolist.forms import TaskForm
 
 import datetime
 from django.http import HttpResponseRedirect
@@ -79,18 +79,17 @@ def get_task(request):
 
 @login_required(login_url='/todolist/login/')
 def update_task(request, pk):
-    model = get_object_or_404(ToDoList, id=pk)
+    model = ToDoList.objects.get(id=pk)
 
     if request.method == "POST":
+        print(model.is_finished)
         if(model.is_finished == False):
             model.is_finished = True
         else:
             model.is_finished = False
-        model.save()
-        return(redirect('todolist:show_todolist'))
+    model.save()
+    return redirect('todolist:show_todolist')
 
-    context = {'model': model}
-    return render(request, 'todolist.html', context)
 
 @login_required(login_url='/todolist/login/')
 def delete_task(request, pk):

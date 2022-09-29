@@ -13,6 +13,7 @@
     <form method="POST" action="">
         {% csrf_token %}
         {{forms.as_table}}
+        <br>
         <input type="submit" value="Tambah Task">
     </form>
 

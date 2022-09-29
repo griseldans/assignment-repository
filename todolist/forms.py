@@ -6,7 +6,7 @@ class TaskForm(forms.ModelForm):
         model = ToDoList
         fields = ['title', 'description']
 
-class UpdateTask(forms.ModelForm):
-    class Meta:
-        model = ToDoList
-        fields = ['is_finished']
+# class UpdateTask(forms.ModelForm):
+#     class Meta:
+#         model = ToDoList
+#         fields = ['is_finished']
