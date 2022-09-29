@@ -1,4 +1,5 @@
-from todolist.forms import TaskForm
+from statistics import mode
+from todolist.forms import TaskForm, UpdateTask
 
 import datetime
 from django.http import HttpResponseRedirect
@@ -10,7 +11,7 @@ from django.contrib.auth import logout
 
 from django.contrib.auth import authenticate, login
 
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
@@ -19,7 +20,7 @@ from todolist.models import ToDoList
 
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
-    data_todolist = ToDoList.objects.all()
+    data_todolist = ToDoList.objects.filter(user=request.user)
 
     context = {
         'todolist' : data_todolist,
@@ -71,6 +72,29 @@ def get_task(request):
             tempsave = form.save(commit=False)
             tempsave.user = request.user
             form.save()
+            return(redirect('todolist:show_todolist'))
 
     context = {'forms': form}
     return render(request, 'task.html', context)
+
+@login_required(login_url='/todolist/login/')
+def update_task(request, pk):
+    model = get_object_or_404(ToDoList, id=pk)
+
+    if request.method == "POST":
+        if(model.is_finished == False):
+            model.is_finished = True
+        else:
+            model.is_finished = False
+        model.save()
+        return(redirect('todolist:show_todolist'))
+
+    context = {'model': model}
+    return render(request, 'todolist.html', context)
+
+@login_required(login_url='/todolist/login/')
+def delete_task(request, pk):
+    if request.methos == "POST":
+        ToDoList.objects.get(id=pk).delete()
+    return(redirect('todolist:show_todolist'))
+    

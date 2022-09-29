@@ -18,7 +18,7 @@
       <th>Judul Task</th>
       <th>Deskripsi Task</th>
       <th>Status Task</th>
-      <th>Tombol Selesai</th>
+      <th>Update Task</th>
       <th>Hapus Task</th>
     </tr>
     
@@ -34,8 +34,13 @@
             <td>Belum Selesai</td>
         {% endif %}
 
-        <td></td>
-        <td></td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Update">
+          </form>
+        </td>
+        <td><a class="btn delete-btn" href="{% url 'todolist:delete-task' task.id %}"></a></td>
       </tr>
     {% endfor %}
   </table>
