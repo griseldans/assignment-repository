@@ -2,46 +2,36 @@
 
  {% block content %}
 
-  <h1 style = "text-align: center;">My To Do List</h1>
+  <h2 style = "text-align: center;">My To Do List</h2>
 
-  <h5 style="text-align: center;">Username: {{username}}</h5>
+  <h5 id="penyemangat" style="text-align: center;">Let's finish the task, {{username}}!</h5>
 
-  <style>
-    table, th, td {
-      border:1px solid black;
-    }
-  </style>
-
-  <table style="width:100%">
-    <tr>
-      <th>Tanggal Pembuatan Task</th>
-      <th>Judul Task</th>
-      <th>Deskripsi Task</th>
-      <th>Status Task</th>
-      <th>Update Task</th>
-      <th>Hapus Task</th>
-    </tr>
-    
+  <div class="container">
     {% for task in todolist %}
-      <tr>
-        <td>{{task.date}}</td>
-        <td>{{task.title}}</td>
-        <td>{{task.description}}</td>
-
-        {% if task.is_finished %}
-            <td>Selesai</td>
-        {% else %}
-            <td>Belum Selesai</td>
-        {% endif %}
-
-        <td><button><a class="btn delete-btn" href="{% url 'todolist:update-task' task.id %}">Update</a></button></td>
-        <td><button><a class="btn delete-btn" href="{% url 'todolist:delete-task' task.id %}">Hapus</a></button></td>
-      </tr>
+      <div class="card">
+        <div class="card-header">
+          {% if task.is_finished %}
+              <td>Selesai</td>
+          {% else %}
+              <td>Belum Selesai</td>
+          {% endif %}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{task.title}}</h5>
+          <p class="card-text"><b>{{task.date}}</b></p>
+          <p class="card-text">{{task.description}}</p>
+          <a class="btn btn-primary" href="{% url 'todolist:update-task' task.id %}">Update</a>
+          <a class="btn btn-primary" href="{% url 'todolist:delete-task' task.id %}">Hapus</a>
+        </div>
+      </div>
     {% endfor %}
-  </table>
-  <br><p>Login terakhir: {{last_login}}</p>
-  <br>
-  <button><a href="{% url 'todolist:create-task' %}">Tambah Task Baru</a>"</button>
-  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  </div>
+
+  <div class="container">
+    <br><p>Login terakhir: {{last_login}}</p>
+    <br>
+    <button class="btn btn-warning"><a href="{% url 'todolist:create-task' %}">Tambah Task Baru</a></button>
+    <button class="btn btn-danger"><a href="{% url 'todolist:logout' %}">Logout</a></button>
+  </div>
 
  {% endblock content %}

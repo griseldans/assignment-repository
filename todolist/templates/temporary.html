@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+ {% block content %}
+
+  <h1 style = "text-align: center;">My To Do List</h1>
+
+  <h5 style="text-align: center;">Let's finish the task, {{username}}!</h5>
+
+  <style>
+    table, th, td {
+      border:1px solid black;
+    }
+  </style>
+
+  <table style="width:100%">
+    <tr>
+      <th>Tanggal Pembuatan Task</th>
+      <th>Judul Task</th>
+      <th>Deskripsi Task</th>
+      <th>Status Task</th>
+      <th>Update Task</th>
+      <th>Hapus Task</th>
+    </tr>
+    
+    {% for task in todolist %}
+      <tr>
+        <td>{{task.date}}</td>
+        <td>{{task.title}}</td>
+        <td>{{task.description}}</td>
+
+        {% if task.is_finished %}
+            <td>Selesai</td>
+        {% else %}
+            <td>Belum Selesai</td>
+        {% endif %}
+
+        <td><button><a class="btn delete-btn" href="{% url 'todolist:update-task' task.id %}">Update</a></button></td>
+        <td><button><a class="btn delete-btn" href="{% url 'todolist:delete-task' task.id %}">Hapus</a></button></td>
+      </tr>
+    {% endfor %}
+  </table>
+  <br><p>Login terakhir: {{last_login}}</p>
+  <br>
+  <button><a href="{% url 'todolist:create-task' %}">Tambah Task Baru</a>"</button>
+  <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
+
+ {% endblock content %}

@@ -2,44 +2,45 @@
 
 {% block meta %}
 <title>Login</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'todolist/style.css' %}">
 {% endblock meta %}
 
 {% block content %}
 
-<div class = "login">
+<h2>Buat schedulemu di ToDoList</h2>
+<div class="container-account" id="container">
+    <div class="form-container sign-in-container">
+        <form method="POST" action="">
+            <h1>Login</h1>
+            {% csrf_token %}
+            <span>Pastikan username dan password kamu benar :)</span>
+            <input type="text" name="username" placeholder="Username" class="form-control">
+            <input type="password" name="password" placeholder="Password" class="form-control">
+            <input class="btn btn-primary" type="submit" value="Login">
+        </form>
+        Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+         <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Belum punya akun? Register dulu, yuk!</p>
+          <button class="ghost" id="signUp"><a href="{% url 'todolist:register' %}">Register</a></button>
+         </div>
+        </div>
+       </div>
 
-    <h1>Login</h1>
-
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
-
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
-        
-    Belum mempunyai akun? <a href="{% url 'todolist:register' %}">Buat Akun</a>
-
+    <div class="container">
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}  
+    </div>
+    
 </div>
 
 {% endblock content %}
