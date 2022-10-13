@@ -27,7 +27,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form method="POST">
+        <form method="POST" id="form-add-task">
           {% csrf_token %}
           <input id="label-add-title" type="text" class="form-control" placeholder="Title">
           <input id="label-add-description" type="text" class="form-control" placeholder="Description">
@@ -99,6 +99,7 @@
           `
           $('#card-task').append(cardTask)
         })
+        $("#form-add-task")[0].reset()
       })
     }
 

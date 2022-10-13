@@ -73,7 +73,9 @@ def logout_user(request):
 def get_task(request):
     form = TaskForm(request.POST)
     if request.method == "POST":
+        print("Masuk post")
         if form.is_valid():
+            print("Masuk valid")
             tempsave = form.save(commit=False)
             tempsave.user = request.user
             form.save()
