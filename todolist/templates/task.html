@@ -6,16 +6,29 @@
 
 {% block content %}
 
+<div class="form-container sign-in-container">
+    <form method="POST" action="">
+        <h1>Buat Task Baru</h1>
+        {% csrf_token %}
+        <span>Masukkan detail task kamu di sini</span>
+        <input type="text" name="Judul Task" placeholder="Judul Task" class="form-control">
+        <input type="text" name="Detail Task" placeholder="Detail Task" class="form-control">
+        <input class="btn btn-primary" type="submit" value="Tambah Task">
+    </form>
+</div>
+
 <div class = "container">
 
-    <h1>Buat Task Baru</h1>
+    <!-- <h1>Buat Task Baru</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
         {{forms.as_table}}
         <br>
         <input type="submit" value="Tambah Task">
-    </form>
+    </form> -->
+
+
 
     {% if messages %}
         <ul>
@@ -24,8 +37,6 @@
             {% endfor %}
         </ul>
     {% endif %}     
-        
-
 </div>
 
 {% endblock content %}

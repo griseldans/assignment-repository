@@ -1,31 +1,45 @@
 {% extends 'base.html' %}
 
- {% block content %}
 
+ {% block content %}
   <h2 style = "text-align: center;">My To Do List</h2>
 
   <h5 id="penyemangat" style="text-align: center;">Let's finish the task, {{username}}!</h5>
 
-  <div class="container">
-    {% for task in todolist %}
-      <div class="card">
-        <div class="card-header">
-          {% if task.is_finished %}
-              <td>Selesai</td>
-          {% else %}
-              <td>Belum Selesai</td>
-          {% endif %}
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{task.title}}</h5>
-          <p class="card-text"><b>{{task.date}}</b></p>
-          <p class="card-text">{{task.description}}</p>
-          <a class="btn btn-primary" href="{% url 'todolist:update-task' task.id %}">Update</a>
-          <a class="btn btn-primary" href="{% url 'todolist:delete-task' task.id %}">Hapus</a>
-        </div>
-      </div>
-    {% endfor %}
+  <div class="container" id="card-task">
+
   </div>
+
+<div class="container text-center">
+  <!-- Button trigger modal -->
+  <br>
+  <button type="button" data-bs-toggle="modal" data-bs-target="#modal-add-task" class="btn btn-primary" >
+    Add Task
+  </button>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-add-task" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-add-task-title">Add Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST">
+          {% csrf_token %}
+          <input id="label-add-title" type="text" class="form-control" placeholder="Title">
+          <input id="label-add-description" type="text" class="form-control" placeholder="Description">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="save-task-btn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <div class="container">
     <br><p>Login terakhir: {{last_login}}</p>
@@ -34,4 +48,63 @@
     <button class="btn btn-danger"><a href="{% url 'todolist:logout' %}">Logout</a></button>
   </div>
 
+ <script>
+    function get_json(){
+    $.get('/todolist/json/', function(data){
+        var cardTask = ""
+        for(var i = 0; i < data.length; i++){
+          console.log(data[i])
+          cardTask = `
+          <div class="card">
+            <div class="card-header">
+              ${data[i].fields.is_finished ? `Selesai` : `Belum Selesai`}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">${data[i].fields.title}</h5>
+              <p class="card-text"><b>${data[i].fields.date}</b></p>
+              <p class="card-text">${data[i].fields.description}</p>
+              <a class="btn btn-primary" href="/todolist/update-task/${data[i].pk}">Update</a>
+              <a class="btn btn-primary" href="/todolist/delete-task/${data[i].pk}">Hapus</a>
+            </div>
+          </div>
+          `
+          $('#card-task').append(cardTask);
+        }
+        
+    })
+    }
+
+    function add_task(){
+      $('#save-task-btn').click(function(){
+        $.post("/todolist/add/",
+        {
+          title: $('#label-add-title').val(),
+          description: $('#label-add-description').val(),
+        },
+        function(data){
+          console.log($('#label-add-title').val())
+          var cardTask = `
+          <div class="card">
+            <div class="card-header">
+              ${data.is_finished ? `Selesai` : `Belum Selesai`}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">${data.title}</h5>
+              <p class="card-text"><b>${data.date}</b></p>
+              <p class="card-text">${data.description}</p>
+              <a class="btn btn-primary" href="/todolist/update-task/${data.pk}">Update</a>
+              <a class="btn btn-primary" href="/todolist/delete-task/${data.pk}">Hapus</a>
+            </div>
+          </div>
+          `
+          $('#card-task').append(cardTask)
+        })
+      })
+    }
+
+    $(document).ready(function(){
+      get_json()
+      add_task()
+    });
+ </script>
  {% endblock content %}

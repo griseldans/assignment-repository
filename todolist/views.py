@@ -1,4 +1,9 @@
-from statistics import mode
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+from django.core import serializers
+from django.http import HttpResponse
+
 from todolist.forms import TaskForm
 
 import datetime
@@ -11,7 +16,7 @@ from django.contrib.auth import logout
 
 from django.contrib.auth import authenticate, login
 
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
@@ -94,3 +99,27 @@ def delete_task(request, pk):
     ToDoList.objects.get(id=pk).delete()
     return(redirect('todolist:show_todolist'))
     
+def show_json(request):
+    data = ToDoList.objects.filter(user = request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+@login_required(login_url='/todolist/login/')
+@csrf_exempt
+def add_task(request):
+    form = TaskForm(request.POST)
+    if request.method == "POST":
+        if form.is_valid():
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data["description"]
+            newTask = ToDoList.objects.create(user=request.user,title=title, description=description)
+            data = {
+                "pk" : newTask.pk,
+                "title" : newTask.title,
+                "description" : newTask.description,
+                "is_finished" : newTask.is_finished,
+                "date" : newTask.date,
+
+            }
+            newTask.save()
+        return JsonResponse(data)
+
